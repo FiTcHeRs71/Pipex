@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yourlogin <youremail@student.42lausanne.ch>    +#+  +:+       +#+    */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/09 16:39:40 by yourlogin         #+#    #+#             */
-/*   Updated: 2025/10/09 16:39:58 by yourlogin        ###   ########.ch       */
+/*   Created: 2025/12/04 15:10:46 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/04 15:10:46 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free(char **tab, size_t count)
+void	ft_free_2d_array(char **tab, size_t count)
 {
 	while (count > 0)
 	{
@@ -64,7 +64,7 @@ char	**ft_complet_array(char **array_of_string, char c, char const *s)
 		array_of_string[y] = ft_substr(s, start, i - start);
 		if (!array_of_string[y])
 		{
-			return (ft_free(array_of_string, y), NULL);
+			return (ft_free_2d_array(array_of_string, y), NULL);
 		}
 		y++;
 	}
@@ -95,19 +95,19 @@ char	**ft_split(char const *s, char c)
 FT_SPLIT (simplified)
 
 NAME
-    ft_split -- split a string into an array of words
+	ft_split -- split a string into an array of words
 SYNOPSIS
-    char **ft_split(const char *s, char c);
+	char **ft_split(const char *s, char c);
 DESCRIPTION
-    Allocate (with malloc(3)) and returns an array of strings 
+	Allocate (with malloc(3)) and returns an array of strings
 	obtained by splitting s with the character c, used as delimiter.
-    The returned array must be NUL-terminated.
+	The returned array must be NUL-terminated.
 PARAMETERS
-    s: string to split
-    c: delimiter character
+	s: string to split
+	c: delimiter character
 RETURN VALUES
-    ft_split() returns an array of strings resulting 
+	ft_split() returns an array of strings resulting
 	from the splitting of s; NULL if the memory allocation failed.
 AUTHORIZED EXTERNAL FUNCTIONS
-    malloc(3)
+	malloc(3)
 	*/

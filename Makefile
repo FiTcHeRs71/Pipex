@@ -9,7 +9,7 @@ SRCDIR = src
 OBJDIR = obj
 
 SRCS = $(addprefix $(SRCDIR)/, \
-	pipex.c)
+	pipex.c error.c)
 
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
