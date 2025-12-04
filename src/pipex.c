@@ -24,3 +24,4 @@ int	main(int argc, char **argv, char **envp)
 // cree un fichier si il exite pas
 // include ft_counter dans libft et maj split
 // maj make file sur la compilation
+

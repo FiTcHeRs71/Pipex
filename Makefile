@@ -25,14 +25,13 @@ all: $(NAME)
 $(LIBFT):
 	@echo "$(CYAN)Compiling libft...$(RESET)"
 	@make -C libft
-	@echo "$(GREEN)✓ Libft ready$(RESET)"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@echo "$(CYAN)Compiled: $<$(RESET)"
+	@printf "$(CYAN)Compiling...$(RESET)\r"
 
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
