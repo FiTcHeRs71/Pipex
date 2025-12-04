@@ -22,19 +22,28 @@ typedef struct s_pipex
 	char	**envp;
 }			t_pipex;
 
+// init_data.c
 t_pipex		*init_pipex(char **argv, char **envp, t_pipex *data);
+bool		init_cmd(t_cmd *cmd, char *cmd_str, char **envp, t_pipex *data);
+char		**parse_command(char *cmd, t_pipex *data);
+char		*search_in_path(char *cmd, char **envp, t_pipex *data);
+char		*try_path(char *envp, char *cmd, t_pipex *data);
+
+// init_data_utils.c
 int			open_infile(char *infile, t_pipex *data);
 int			open_outfile(char *outfile, t_pipex *data);
-bool		init_cmd(t_cmd *cmd, char *cmd_str, char **envp);
-char		**parse_command(char *cmd);
-char		*find_path(char *cmd, char **envp);
-char		*search_in_path(char *cmd, char **envp);
+int			ft_counter(char *s, char c);
+char		*find_path(char *cmd, char **envp, t_pipex *data);
 char		*get_path_envp(char **envp);
-char		*try_path(char *envp, char *cmd);
+
+// exec_pipe.c
 void		exec_pipline(t_pipex *data);
 void		exec_cmd1(t_pipex *data);
 void		exec_cmd2(t_pipex *data);
-void		ft_error(char *str, t_pipex *data);
+
+// error_and_clear.c
+void		ft_free_2d_arrayss(char **args);
 void		ft_free_struct(t_pipex *data);
+void		ft_error(char *str, t_pipex *data);
 
 #endif
