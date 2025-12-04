@@ -236,13 +236,13 @@ char	*search_in_path(char *cmd, char **envp)
 		result = try_path(path[i], cmd);
 		if (result)
 		{
-			ft_free_2d_array(path, size + 1);
+			ft_free_2d_array(path, size );
 			return (result);
 		}
 		free(result);
 		i++;
 	}
-	ft_free_2d_array(path, i);
+	ft_free_2d_array(path, size);
 	return (NULL);
 }
 char	*get_path_envp(char **envp)

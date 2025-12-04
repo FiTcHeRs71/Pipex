@@ -7,12 +7,8 @@ void	ft_free_2d_arrayss(char **args)
 	i = 0;
 	while (args[i])
 	{
-		i++;
-	}
-	while (i > 0)
-	{
 		free(args[i]);
-		i--;
+		i++;
 	}
 	free(args);
 }
