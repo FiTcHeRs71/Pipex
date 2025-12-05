@@ -42,11 +42,21 @@ bool	init_cmd(t_cmd *cmd, char *cmd_str, char **envp, t_pipex *data)
 char	**parse_command(char *cmd, t_pipex *data)
 {
 	char	**args;
+	char	*temp;
+	size_t	i;
 
+	i = 0;
 	args = ft_split(cmd, ' ');
 	if (!args)
 	{
 		ft_error("Malloc Failed", data);
+	}
+	while(args[i])
+	{
+		temp = ft_strtrim(args[i],"'");
+		free(args[i]);
+		args[i] = temp;
+		i++;
 	}
 	return (args);
 }
@@ -63,7 +73,7 @@ char	*search_in_path(char *cmd, char **envp, t_pipex *data)
 	path_env = get_path_envp(envp);
 	if (!path_env)
 	{
-		ft_error("Malloc Failed", data);
+		ft_error("No path available", data);
 	}
 	path = ft_split(path_env, ':');
 	if (!path)

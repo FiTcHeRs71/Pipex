@@ -9,18 +9,18 @@ void	exec_pipline(t_pipex *data)
 	{
 		ft_error("Fork failed", data);
 	}
-	else if (data->pid1 > 0)
+	if (data->pid1 == 0)
 	{
 		exec_cmd1(data);
 	}
 	close(data->pipe_fd[1]);
 	close(data->in_file);
 	data->pid2 = fork();
-	if (data->pid1 < 0)
+	if (data->pid2 < 0)
 	{
 		ft_error("Fork failed", data);
 	}
-	else if (data->pid2 > 0)
+	if (data->pid2 == 0)
 	{
 		exec_cmd2(data);
 	}
@@ -34,13 +34,14 @@ void	exec_cmd1(t_pipex *data)
 	{
 		if (dup2(data->in_file, STDIN_FILENO) < 0)
 		{
-			ft_error("??", data);
+			perror("dup2 on infile for cmd1");
 		}
 	}
 	close(data->in_file);
 	if (dup2(data->pipe_fd[1], STDOUT_FILENO) < 0)
 	{
-		ft_error("??", data);
+		perror("dup2 on outfile for cmd1");
+		exit(1);
 	}
 	close(data->pipe_fd[0]);
 	close(data->pipe_fd[1]);
@@ -55,11 +56,11 @@ void	exec_cmd2(t_pipex *data)
 {
 	if (dup2(data->pipe_fd[0], STDIN_FILENO) < 0)
 	{
-		ft_error("????", data);
+		ft_error("dup2 on infile for cmd2", data);
 	}
 	if (dup2(data->out_file, STDOUT_FILENO) < 0)
 	{
-		ft_error("??", data);
+		ft_error("dup2 on infile for cmd2", data);
 	}
 	close(data->pipe_fd[0]);
 	close(data->pipe_fd[1]);

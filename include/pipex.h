@@ -45,5 +45,6 @@ void		exec_cmd2(t_pipex *data);
 void		ft_free_2d_arrayss(char **args);
 void		ft_free_struct(t_pipex *data);
 void		ft_error(char *str, t_pipex *data);
+void		ft_check_close(t_pipex *data);
 
 #endif
