@@ -13,27 +13,19 @@ void	ft_free_2d_arrayss(char **args)
 	free(args);
 }
 
-/*void	ft_free_struct(t_pipex *data)
+void	ft_free_struct(t_pipex *data)
 {
-	if (data && data->cmd1.args)
+	if (data && data->cmd->args)
 	{
-		ft_free_2d_arrayss(data->cmd1.args);
+		ft_free_2d_arrayss(data->cmd->args);
 	}
-	if (data && data->cmd1.path)
+	if (data && data->cmd->path)
 	{
-		free(data->cmd1.path);
-	}
-	if (data && data->cmd2.args)
-	{
-		ft_free_2d_arrayss(data->cmd2.args);
-	}
-	if (data && data->cmd2.path)
-	{
-		free(data->cmd2.path);
+		free(data->cmd->path);
 	}
 	free(data);
-}*/
-void	ft_check_close(t_pipex *data)
+}
+void	ft_check_close(t_pipex *data) // boucle sur data ?
 {
 	if (data && data->in_file > 0)
 	{
@@ -51,4 +43,12 @@ void	ft_check_close(t_pipex *data)
 	{
 		close(data->pipe_fd[1]);
 	}
+}
+
+void	ft_error(char *str, t_pipex *data)
+{
+	ft_putstr_fd(str, 2);
+	ft_check_close(data);
+	ft_free_struct(data);
+	exit(EXIT_FAILURE);
 }
