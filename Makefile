@@ -1,17 +1,23 @@
 # Makefile
 NAME = pipex
+NAME_BONUS = pipex_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-INCLUDES = -I./includes -I./libft/include
+INCLUDES = -I./include -I./libft/include
 
 SRCDIR = src
+SRC_BONUS_DIR = bonus
 OBJDIR = obj
 
 SRCS = $(addprefix $(SRCDIR)/, \
 	pipex.c init_data.c init_data_utils.c exec_pipe.c error_and_clear.c)
 
+SRCS_BONUS = $(addprefix $(SRC_BONUS_DIR)/, \
+	pipex_bonus.c init_data_bonus.c init_data_utils_bonus.c exec_pipe_bonus.c error_and_clear_bonus.c)
+
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJS_BNS = $(SRCS_BONUS:$(SRC_BONUS_DIR)/%.c=$(OBJDIR)/%.o)
 
 LIBFT = libft/libft.a
 
@@ -33,9 +39,19 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@printf "$(CYAN)Compiling...$(RESET)\r"
 
+$(OBJDIR)/%.o: $(SRC_BONUS_DIR)/%.c | $(OBJDIR)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@printf "$(CYAN)Compiling bonus...$(RESET)\r"
+
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)✓ Pipex compiled successfully!$(RESET)"
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(LIBFT) $(OBJS_BNS)
+	@$(CC) $(CFLAGS) $(OBJS_BNS) $(LIBFT) -o $(NAME_BONUS)
+	@echo "$(GREEN)✓ Pipex bonus compiled successfully!$(RESET)"
 
 clean:
 	@make clean -C libft
@@ -44,9 +60,9 @@ clean:
 
 fclean: clean
 	@make fclean -C libft
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(NAME_BONUS)
 	@echo "$(GREEN)✓ All cleaned$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
