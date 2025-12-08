@@ -17,7 +17,9 @@ void	close_file(t_pipex *data)
 {
 	close(data->pipe_fd[1]);
 	if (data->in_file > 0)
+	{
 		close(data->in_file);
+	}
 	data->in_file = data->pipe_fd[0];
 }
 

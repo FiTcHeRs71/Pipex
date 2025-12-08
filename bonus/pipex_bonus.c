@@ -1,24 +1,33 @@
 #include "../include/pipex_bonus.h"
 
-void	define_input(t_pipex *data) 
+void	define_input(t_pipex *data)
 {
 	char	*line;
-	char	*temp;
+	int		pip_fd[2];
 
-	line = get_next_line(0); 
-	temp = ft_strdup("");
-	while (line)
+	if (pipe(pip_fd) == -1)
 	{
-		temp = ft_strjoin(temp, line);
-		if (ft_strncmp(line, data->limiter, ft_strlen(line)))
-		{
-			break;
-		}
-		free (line);
-		line = get_next_line(0);
-		ft_putstr_fd(temp, data->pipe_fd[0]);
+		ft_error("Unable to pipe", data);
 	}
-	free (line);
+	while (true)
+	{
+		ft_putstr_fd("heredoc > ", 1);
+		line = get_next_line(0);
+		if (!line)
+		{
+			break ;
+		}
+		if (ft_strncmp(line, data->limiter, ft_strlen(data->limiter)) == 0
+			&& line[ft_strlen(data->limiter)] == '\n')
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, pip_fd[1]);
+		free(line);
+	}
+	close(pip_fd[1]);
+	data->in_file = pip_fd[0];
 }
 
 void	init_data_heredoc(t_pipex *data, char **argv, int argc, char **envp)
@@ -33,13 +42,22 @@ void	init_data_heredoc(t_pipex *data, char **argv, int argc, char **envp)
 
 void	init_multi_cmd(t_pipex *data, int argc, char **argv, char **envp)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	if (ft_strncmp(argv[1], "here_doc", 9))
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
-		define_input(data);
 		init_data_heredoc(data, argv, argc, envp);
+		define_input(data);
+		while (i < data->nb_cmd)
+		{
+			if (!init_cmd(&data->cmd[i], argv[i + 3], envp, data))
+			{
+				//ft_error("Command not vallid", data);
+				perror("yo");
+			}
+			i++;
+		}
 	}
 	else
 	{
@@ -61,7 +79,8 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 	{
-		ft_putstr_fd("Error | Usage : ./pipex_bonus here_doc LIMITER cmd1 cmd2 ... outfile\n",2);
+		ft_putstr_fd("Error | Usage : ./pipex_bonus here_doc LIMITER cmd1 cmd2 ... outfile\n",
+			2);
 		ft_putstr_fd("or : ./pipex_bonus infile cmd1 cmd2 ... outfile\n", 2);
 		exit(EXIT_FAILURE);
 	}

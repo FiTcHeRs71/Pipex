@@ -12,17 +12,6 @@
 
 #include "libft.h"
 
-/*void	ft_putstr(void *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (((char *)str)[i])
-	{
-		write(1, &((char *)str)[i], 1);
-		i++;
-	}
-}*/
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	while (lst)

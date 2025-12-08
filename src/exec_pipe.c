@@ -4,6 +4,7 @@ void	exec_pipline(t_pipex *data)
 {
 	int	signal;
 
+	signal = 0;
 	data->pid1 = fork();
 	if (data->pid1 < 0)
 	{
@@ -24,8 +25,14 @@ void	exec_pipline(t_pipex *data)
 	{
 		exec_cmd2(data);
 	}
-	waitpid(data->pid1, &signal, 0);
-	waitpid(data->pid2, &signal, 0); //check signal if -1 ?
+	if (waitpid(data->pid1, &signal, 0) < 0)
+	{
+
+	}
+	if (waitpid(data->pid2, &signal, 0) < 0)
+	{
+		
+	} //check signal if -1 ?
 }
 
 void	exec_cmd1(t_pipex *data)

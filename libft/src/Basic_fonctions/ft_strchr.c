@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdcurot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 14:34:38 by fdcurot           #+#    #+#             */
-/*   Updated: 2025/10/06 14:34:38 by fdcurot          ###   ########.fr       */
+/*   Created: 2025/12/08 15:23:52 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/08 15:23:58 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+	{
+		return(NULL);
+	}
 	while (*s)
 	{
 		if (*s == (char)c)

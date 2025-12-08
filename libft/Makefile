@@ -33,7 +33,7 @@ OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 CC = gcc
 AR = ar rcs
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDE = -I$(INCDIR) -I$(INCDIR)/ft_printf -I$(INCDIR)/get_next_line
 
 # Colors
