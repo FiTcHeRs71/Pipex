@@ -1,5 +1,41 @@
 #include "../include/pipex_bonus.h"
 
+void	exec_cmd(t_pipex *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_cmd)
+	{
+		if (i < data->nb_cmd - 1)
+		{
+			if (pipe(data->pipe_fd) < 0)
+				ft_error("Unable to pipe", data);
+		}
+		data->pid1 = fork();
+		if (data->pid1 < 0)
+		{
+			ft_printf("ERRRRRRRRRRRRRROR");
+			exit(EXIT_FAILURE);
+		}
+		if (data->pid1 == 0)
+			handle_child_process(data, i, (i == data->nb_cmd - 1));
+		if (i < data->nb_cmd - 1)
+		{
+			close_file(data, i);
+		}
+		i++;
+	}
+}
+
+void	handle_child_process(t_pipex *data, int i, int is_last)
+{
+	if (is_last)
+		exec_cmd2(data, i);
+	else
+		exec_cmd1(data, i);
+}
+
 void	exec_cmd1(t_pipex *data, int i)
 {
 	if (data->in_file >= 0)
@@ -26,16 +62,21 @@ void	exec_cmd1(t_pipex *data, int i)
 
 void	exec_cmd2(t_pipex *data, int i)
 {
-	if (dup2(data->pipe_fd[0], STDIN_FILENO) < 0)
+	if (data->in_file >= 0)
 	{
-		ft_error("dup2 on infile for cmd2", data);
+		if (dup2(data->in_file, STDIN_FILENO) < 0)
+		{
+			ft_error("dup2 on infile for cmd2", data);
+		}
 	}
 	if (dup2(data->out_file, STDOUT_FILENO) < 0)
 	{
 		ft_error("dup2 on infile for cmd2", data);
 	}
-	close(data->pipe_fd[0]);
-	close(data->pipe_fd[1]);
+	if (data->pipe_fd[0] > 0)
+		close(data->pipe_fd[0]);
+	if (data->pipe_fd[1] > 0)
+		close(data->pipe_fd[1]);
 	if (execve(data->cmd[i].path, data->cmd[i].args, data->envp) < 0)
 	{
 		ft_error("execve failed", data);

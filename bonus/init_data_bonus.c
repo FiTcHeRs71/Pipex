@@ -74,8 +74,8 @@ char	*search_in_path(char *cmd, char **envp, t_pipex *data)
 
 char	*try_path(char *envp, char *cmd, t_pipex *data)
 {
-	char *temp;
-	char *temp2;
+	char	*temp;
+	char	*temp2;
 
 	temp = ft_strjoin(envp, "/");
 	if (!temp)
@@ -94,4 +94,13 @@ char	*try_path(char *envp, char *cmd, t_pipex *data)
 	}
 	free(temp2);
 	return (NULL);
+}
+
+void	init_data(t_pipex *data, char **argv, int argc, char **envp)
+{
+	data->nb_cmd = argc - 3;
+	data->envp = envp;
+	data->in_file = open_infile(argv[1], data);
+	data->out_file = open_outfile(argv[argc - 1], data);
+	data->cmd = ft_calloc(data->nb_cmd, sizeof(t_cmd));
 }
