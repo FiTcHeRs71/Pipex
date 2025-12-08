@@ -47,4 +47,7 @@ void		ft_free_struct(t_pipex *data);
 void		ft_error(char *str, t_pipex *data);
 void		ft_check_close(t_pipex *data);
 
+// pipex_bonus.c
+char		**define_input(t_pipex *data);
+
 #endif

@@ -12,6 +12,8 @@ typedef struct s_cmd
 typedef struct s_pipex
 {
 	int		pipe_fd[2];
+	char	*limiter;
+	char	**term_input;
 	int		in_file;
 	int		out_file;
 	int		nb_cmd;
@@ -26,7 +28,7 @@ void		ft_free_2d_arrayss(char **args);
 void		ft_check_close(t_pipex *data);
 void		ft_free_struct(t_pipex *data);
 void		ft_error(char *str, t_pipex *data);
-void		close_file(t_pipex *data, int i);
+void		close_file(t_pipex *data);
 
 // exec pipe_bonus.c
 void		exec_cmd1(t_pipex *data, int i);

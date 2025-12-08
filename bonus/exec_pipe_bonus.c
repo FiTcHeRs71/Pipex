@@ -15,14 +15,14 @@ void	exec_cmd(t_pipex *data)
 		data->pid1 = fork();
 		if (data->pid1 < 0)
 		{
-			ft_printf("ERRRRRRRRRRRRRROR");
+			ft_printf("Unable to fork");
 			exit(EXIT_FAILURE);
 		}
 		if (data->pid1 == 0)
 			handle_child_process(data, i, (i == data->nb_cmd - 1));
 		if (i < data->nb_cmd - 1)
 		{
-			close_file(data, i);
+			close_file(data);
 		}
 		i++;
 	}

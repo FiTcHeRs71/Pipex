@@ -13,10 +13,10 @@ void	ft_free_2d_arrayss(char **args)
 	free(args);
 }
 
-void	close_file(t_pipex *data, int i)
+void	close_file(t_pipex *data)
 {
 	close(data->pipe_fd[1]);
-	if (data->in_file > 0 && i > 0)
+	if (data->in_file > 0)
 		close(data->in_file);
 	data->in_file = data->pipe_fd[0];
 }
@@ -30,22 +30,25 @@ void	ft_free_struct(t_pipex *data)
 	{
 		return ;
 	}
-	while (i < data->nb_cmd)
+	if (data->cmd)
 	{
-		if (data && data->cmd[i].args)
+		while (i < data->nb_cmd)
 		{
-			ft_free_2d_arrayss(data->cmd[i].args);
+			if (data && data->cmd[i].args)
+			{
+				ft_free_2d_arrayss(data->cmd[i].args);
+			}
+			if (data && data->cmd[i].path)
+			{
+				free(data->cmd[i].path);
+			}
+			i++;
 		}
-		if (data && data->cmd[i].path)
-		{
-			free(data->cmd[i].path);
-		}
-		i++;
+		free(data->cmd);
 	}
-	free(data->cmd);
 	free(data);
 }
-void	ft_check_close(t_pipex *data) // boucle sur data ?
+void	ft_check_close(t_pipex *data)
 {
 	if (!data)
 	{
