@@ -16,7 +16,7 @@ SRCS = $(addprefix $(SRCDIR)/, \
 
 SRCS_BONUS = $(addprefix $(SRC_BONUS_DIR)/, \
 	pipex_bonus.c init_data_bonus.c init_data_utils_bonus.c exec_pipe_bonus.c error_and_clear_bonus.c \
-	command_error.c)
+	command_error_bonus.c)
 
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 OBJS_BONUS = $(SRCS_BONUS:$(SRC_BONUS_DIR)/%.c=$(OBJDIR_BONUS)/%.o)

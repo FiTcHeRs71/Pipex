@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 04/12/2025 17:39:06 by fducrot           #+#    #+#             */
-/*   Updated: 09/12/2025 10:50:05 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 13:51:25 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 13:52:01 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	exec_cmd1(t_pipex *data)
 	}
 	close(data->pipe_fd[0]);
 	close(data->pipe_fd[1]);
+	if (!data->cmd1.path)
+	{
+		command_error("pipex: command not found: ", data->cmd1.args[0]);
+		exit(127);
+	}
 	if (execve(data->cmd1.path, data->cmd1.args, data->envp) < 0)
 	{
 		ft_error("execve failed", data);
@@ -77,6 +82,11 @@ void	exec_cmd2(t_pipex *data)
 	}
 	close(data->pipe_fd[0]);
 	close(data->pipe_fd[1]);
+	if (!data->cmd2.path)
+	{
+		command_error("pipex: command not found: ", data->cmd2.args[0]);
+		exit(127);
+	}
 	if (execve(data->cmd2.path, data->cmd2.args, data->envp) < 0)
 	{
 		ft_error("execve failed", data);
