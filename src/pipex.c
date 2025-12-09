@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 10:49:45 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 10:49:56 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/pipex.h"
 
@@ -18,8 +29,3 @@ int	main(int argc, char **argv, char **envp)
 	ft_free_struct(data);
 	return (0);
 }
-
-// cree un fichier si il exite pas
-// include ft_counter dans libft et maj split
-// maj make file sur la compilation
-// ft_putstr_fd("or: ./pipex here_doc LIMITER cmd1 cmd2 outfile\n", 2);

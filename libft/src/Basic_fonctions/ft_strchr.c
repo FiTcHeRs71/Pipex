@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 15:23:52 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/08 15:23:58 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 10:55:47 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 10:55:47 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strchr(const char *s, int c)
 {
 	if (!s)
 	{
-		return(NULL);
+		return (NULL);
 	}
 	while (*s)
 	{

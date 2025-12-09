@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 04/12/2025 17:39:06 by fducrot           #+#    #+#             */
+/*   Updated: 09/12/2025 10:50:05 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex.h"
 
 void	exec_pipline(t_pipex *data)
@@ -25,14 +37,8 @@ void	exec_pipline(t_pipex *data)
 	{
 		exec_cmd2(data);
 	}
-	if (waitpid(data->pid1, &signal, 0) < 0)
-	{
-
-	}
-	if (waitpid(data->pid2, &signal, 0) < 0)
-	{
-		
-	} //check signal if -1 ?
+	waitpid(data->pid1, NULL, 0);
+	waitpid(data->pid2, &signal, 0);
 }
 
 void	exec_cmd1(t_pipex *data)

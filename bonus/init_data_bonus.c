@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_data_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 10:51:48 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 10:52:39 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex_bonus.h"
 
 bool	init_cmd(t_cmd *cmd, char *cmd_str, char **envp, t_pipex *data)
@@ -48,23 +60,16 @@ char	*search_in_path(char *cmd, char **envp, t_pipex *data)
 	i = 0;
 	path_env = get_path_envp(envp);
 	if (!path_env)
-	{
 		ft_error("No path available", data);
-	}
 	path = ft_split(path_env, ':');
 	if (!path)
-	{
 		ft_error("Malloc Failed", data);
-	}
 	size = ft_counter(path_env, ':');
 	while (path[i])
 	{
 		result = try_path(path[i], cmd, data);
 		if (result)
-		{
-			ft_free_2d_array(path, size);
-			return (result);
-		}
+			return (ft_free_2d_array(path, size), result);
 		free(result);
 		i++;
 	}
@@ -103,4 +108,8 @@ void	init_data(t_pipex *data, char **argv, int argc, char **envp)
 	data->in_file = open_infile(argv[1], data);
 	data->out_file = open_outfile(argv[argc - 1], data);
 	data->cmd = ft_calloc(data->nb_cmd, sizeof(t_cmd));
+	if (!data->cmd)
+	{
+		ft_error("Malloc failed", data);
+	}
 }

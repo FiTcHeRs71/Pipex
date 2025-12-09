@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 11:07:20 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 11:08:07 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex.h"
 
 t_pipex	*init_pipex(char **argv, char **envp, t_pipex *data)
@@ -24,6 +36,7 @@ t_pipex	*init_pipex(char **argv, char **envp, t_pipex *data)
 	}
 	return (data);
 }
+
 bool	init_cmd(t_cmd *cmd, char *cmd_str, char **envp, t_pipex *data)
 {
 	cmd->args = parse_command(cmd_str, data);
@@ -51,9 +64,9 @@ char	**parse_command(char *cmd, t_pipex *data)
 	{
 		ft_error("Malloc Failed", data);
 	}
-	while(args[i])
+	while (args[i])
 	{
-		temp = ft_strtrim(args[i],"'");
+		temp = ft_strtrim(args[i], "'");
 		free(args[i]);
 		args[i] = temp;
 		i++;
@@ -72,23 +85,16 @@ char	*search_in_path(char *cmd, char **envp, t_pipex *data)
 	i = 0;
 	path_env = get_path_envp(envp);
 	if (!path_env)
-	{
 		ft_error("No path available", data);
-	}
 	path = ft_split(path_env, ':');
 	if (!path)
-	{
 		ft_error("Malloc Failed", data);
-	}
 	size = ft_counter(path_env, ':');
 	while (path[i])
 	{
 		result = try_path(path[i], cmd, data);
 		if (result)
-		{
-			ft_free_2d_array(path, size);
-			return (result);
-		}
+			return (ft_free_2d_array(path, size), result);
 		free(result);
 		i++;
 	}
@@ -98,8 +104,8 @@ char	*search_in_path(char *cmd, char **envp, t_pipex *data)
 
 char	*try_path(char *envp, char *cmd, t_pipex *data)
 {
-	char *temp;
-	char *temp2;
+	char	*temp;
+	char	*temp2;
 
 	temp = ft_strjoin(envp, "/");
 	if (!temp)

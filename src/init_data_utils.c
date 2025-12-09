@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_data_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 11:06:58 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 11:07:02 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex.h"
 
 int	open_infile(char *infile, t_pipex *data)
@@ -23,6 +35,7 @@ int	open_outfile(char *outfile, t_pipex *data)
 	}
 	return (fd);
 }
+
 int	ft_counter(char *s, char c)
 {
 	int	count;
@@ -63,7 +76,7 @@ char	*find_path(char *cmd, char **envp, t_pipex *data)
 
 char	*get_path_envp(char **envp)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (envp[i])

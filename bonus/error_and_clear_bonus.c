@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_and_clear_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 10:55:09 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 10:55:09 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex_bonus.h"
 
 void	ft_free_2d_arrayss(char **args)
@@ -50,6 +62,7 @@ void	ft_free_struct(t_pipex *data)
 	}
 	free(data);
 }
+
 void	ft_check_close(t_pipex *data)
 {
 	if (!data)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_pipe_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 06/12/2025 13:29:35 by fducrot           #+#    #+#             */
+/*   Updated: 09/12/2025 10:51:06 by fducrot          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex_bonus.h"
 
 void	exec_cmd(t_pipex *data)
@@ -14,16 +26,17 @@ void	exec_cmd(t_pipex *data)
 		}
 		data->pid1 = fork();
 		if (data->pid1 < 0)
-		{
-			ft_printf("Unable to fork");
-			exit(EXIT_FAILURE);
-		}
+			ft_error("Fork failed", data);
 		if (data->pid1 == 0)
 			handle_child_process(data, i, (i == data->nb_cmd - 1));
 		if (i < data->nb_cmd - 1)
-		{
 			close_file(data);
-		}
+		i++;
+	}
+	i = 0;
+	while (i < data->nb_cmd)
+	{
+		waitpid(-1, NULL, 0);
 		i++;
 	}
 }
