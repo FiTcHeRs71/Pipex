@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 05/12/2025 13:30:30 by fducrot           #+#    #+#             */
-/*   Updated: 09/12/2025 10:50:41 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 11:41:26 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 11:41:37 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ int			open_outfile(char *outfile, t_pipex *data);
 int			ft_counter(char *s, char c);
 char		*find_path(char *cmd, char **envp, t_pipex *data);
 char		*get_path_envp(char **envp);
+
+// command_error.c
+void		command_error(char *message, char *command);
 
 #endif

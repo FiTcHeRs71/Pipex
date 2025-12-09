@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 10:50:37 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 10:50:37 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 13:29:44 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 13:30:03 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		ft_free_2d_arrayss(char **args);
 void		ft_free_struct(t_pipex *data);
 void		ft_error(char *str, t_pipex *data);
 void		ft_check_close(t_pipex *data);
+void		command_error(char *message, char *command);
 
 // pipex_bonus.c
 char		**define_input(t_pipex *data);

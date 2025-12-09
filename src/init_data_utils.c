@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 11:06:58 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 11:07:02 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 13:31:11 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 13:31:28 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ char	*get_path_envp(char **envp)
 	size_t	i;
 
 	i = 0;
+	if (!envp)
+	{
+		return (NULL);
+	}
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)

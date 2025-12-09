@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 11:07:20 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 11:08:07 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 13:29:09 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 13:29:32 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_pipex	*init_pipex(char **argv, char **envp, t_pipex *data)
 	data->out_file = open_outfile(argv[4], data);
 	if (!init_cmd(&data->cmd1, argv[2], envp, data))
 	{
-		ft_error("Command 1 not vallid", data);
+		command_error("pipex : command not found", argv[2]);
 	}
 	if (!init_cmd(&data->cmd2, argv[3], envp, data))
 	{
-		ft_error("Command 2 not valid", data);
+		command_error("pipex : command not found", argv[3]);
 	}
 	if (pipe(data->pipe_fd) < 0)
 	{
@@ -95,7 +95,6 @@ char	*search_in_path(char *cmd, char **envp, t_pipex *data)
 		result = try_path(path[i], cmd, data);
 		if (result)
 			return (ft_free_2d_array(path, size), result);
-		free(result);
 		i++;
 	}
 	ft_free_2d_array(path, size);

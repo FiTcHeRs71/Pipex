@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   command_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 13:24:27 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 13:24:27 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 11:38:43 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 11:38:53 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 
-int	main(int argc, char **argv, char **envp)
+void	command_error(char *message, char *command)
 {
-	t_pipex	*data;
-
-	if (argc != 5)
-	{
-		ft_putstr_fd("Error | Usage : ./pipex infile cmd1 cmd2 outfile\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	data = init_pipex(argv, envp, data);
-	exec_pipline(data);
-	close(data->out_file);
-	ft_check_close(data);
-	ft_free_struct(data);
-	return (0);
+	ft_putstr_fd(message, 2);
+	ft_putendl_fd(command, 2);
 }

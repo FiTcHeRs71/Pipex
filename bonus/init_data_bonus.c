@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 10:51:48 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 10:52:39 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 11:52:09 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 11:52:09 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*search_in_path(char *cmd, char **envp, t_pipex *data)
 		result = try_path(path[i], cmd, data);
 		if (result)
 			return (ft_free_2d_array(path, size), result);
-		free(result);
 		i++;
 	}
 	ft_free_2d_array(path, size);

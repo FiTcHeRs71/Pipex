@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 04/12/2025 13:22:34 by fducrot           #+#    #+#             */
-/*   Updated: 09/12/2025 10:50:14 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 13:27:58 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 13:28:18 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,25 @@ void	ft_error(char *str, t_pipex *data)
 
 void	ft_check_close(t_pipex *data)
 {
-	if (data && data->in_file > 0)
+	if (data && data->in_file >= 0)
 	{
 		close(data->in_file);
 	}
-	if (data && data->out_file > 0)
+	if (data && data->out_file >= 0)
 	{
 		close(data->out_file);
 	}
-	if (data && data->pipe_fd[0] > 0)
+	if (data && data->pipe_fd[0] >= 0)
 	{
 		close(data->pipe_fd[0]);
 	}
-	if (data && data->pipe_fd[1] > 0)
+	if (data && data->pipe_fd[1] >= 0)
 	{
 		close(data->pipe_fd[1]);
 	}
+}
+void	command_error(char *message, char *command)
+{
+	ft_putstr_fd(message, 2);
+	ft_putendl_fd(command, 2);
 }
