@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 13:27:58 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 13:28:18 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 14:30:24 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 14:30:24 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_check_close(t_pipex *data)
 		close(data->pipe_fd[1]);
 	}
 }
+
 void	command_error(char *message, char *command)
 {
 	ft_putstr_fd(message, 2);

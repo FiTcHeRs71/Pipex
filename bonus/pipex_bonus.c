@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 13:56:36 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 13:57:01 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 14:30:36 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 14:30:36 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	init_multi_cmd(t_pipex *data, int argc, char **argv, char **envp)
 		while (i < data->nb_cmd)
 		{
 			if (!init_cmd(&data->cmd[i], argv[i + 3], envp, data))
-				command_error("pipex : command not found", argv[i + 3]);
+				command_error("pipex : command not found : ", argv[i + 3]);
 			i++;
 		}
 	}
@@ -76,11 +76,10 @@ void	init_multi_cmd(t_pipex *data, int argc, char **argv, char **envp)
 		while (i < data->nb_cmd)
 		{
 			if (!init_cmd(&data->cmd[i], argv[i + 2], envp, data))
-				command_error("pipex : command not found", argv[i + 2]);
+				command_error("pipex : command not found : ", argv[i + 2]);
 			i++;
 		}
 	}
-
 }
 
 int	main(int argc, char **argv, char **envp)

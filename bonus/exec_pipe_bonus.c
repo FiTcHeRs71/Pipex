@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fducrot <fducrot@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 13:50:15 by fducrot           #+#    #+#             */
-/*   Updated: 2025/12/09 13:50:45 by fducrot          ###   ########.ch       */
+/*   Created: 2025/12/09 14:05:55 by fducrot           #+#    #+#             */
+/*   Updated: 2025/12/09 14:07:39 by fducrot          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,11 @@ void	exec_cmd1(t_pipex *data, int i)
 	close(data->pipe_fd[1]);
 	if (!data->cmd[i].path)
 	{
-		command_error("pipex: command not found: ", data->cmd[i].args[0]);
-		exit(127);
+		ft_error("No path", data);
 	}
 	if (execve(data->cmd[i].path, data->cmd[i].args, data->envp) < 0)
 	{
 		ft_error("execve failed", data);
-		exit(EXIT_FAILURE);
 	}
 }
 
@@ -97,12 +95,10 @@ void	exec_cmd2(t_pipex *data, int i)
 		close(data->pipe_fd[1]);
 	if (!data->cmd[i].path)
 	{
-		command_error("pipex: command not found: ", data->cmd[i].args[0]);
-		exit(127);
+		ft_error("No path", data);
 	}
 	if (execve(data->cmd[i].path, data->cmd[i].args, data->envp) < 0)
 	{
 		ft_error("execve failed", data);
-		exit(EXIT_FAILURE);
 	}
 }
